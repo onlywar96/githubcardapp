@@ -5,39 +5,39 @@ const LoginPage = ({ onLogin }) => {
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError]= useState('');
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Basic validation
     if (!username.trim()) {
       setError('Username is required');
       return;
     }
-
     if (!email.trim()) {
       setError('Email is required');
       return;
     }
-    
     if (!password.trim()) {
       setError('Password is required');
       return;
     }
 
-  
-    if (username === 'aryan' && password === 'aryan' && email ==='aryan9sudhakaran@gmail.com') {
-      onLogin();
-    } else {
-      alert('Not a valid username,password or emailId');
-    }
+    // Clear error
+    setError('');
+
+    // Here you can add API call to check credentials
+    // For now, allow any filled inputs as valid
+    onLogin({ username, email, password });
   };
 
   return (
     <div className="login-wrapper">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className="aryan">Login to GitHub Viewer</h2>
-        
+
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
         <input
           type="text"
           placeholder="Username"
